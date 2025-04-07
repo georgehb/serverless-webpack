@@ -1,26 +1,34 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "daily"
-      time: "02:00"
+      interval: 'daily'
+      time: '02:00'
       timezone: Europe/Paris
     open-pull-requests-limit: 10
     versioning-strategy: increase
     groups:
       babel-dependencies:
         patterns:
-          - "*babel*"
+          - '*babel*'
     ignore:
-      # require node > 16
+      # require node >= 20
       - dependency-name: glob
         versions:
-          - ">= 9.0.0"
+          - '>= 11.0.0'
+      # require esm
+      - dependency-name: is-builtin-module
+        versions:
+          - '>= 4.0.0'
+      # because tests aren't compatible
+      - dependency-name: serverless
+        versions:
+          - '>= 4.0.0'
   - package-ecosystem: github-actions
-    directory: "/"
+    directory: '/'
     schedule:
       interval: weekly
-      time: "02:00"
+      time: '02:00'
       timezone: Europe/Paris
     open-pull-requests-limit: 10
